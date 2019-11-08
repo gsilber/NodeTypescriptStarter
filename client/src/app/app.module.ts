@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { StoreComponent } from './store/store.component';
 import { LibraryComponent } from './library/library.component';
 import { LandingComponent } from './landing/landing.component';
+import { GameComponent } from './game/game.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StoreComponent,
     LibraryComponent,
-    LandingComponent
+    LandingComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,
