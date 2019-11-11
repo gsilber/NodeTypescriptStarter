@@ -1,1 +1,12 @@
-<p>game works!</p>
+<a [routerLink]="['/store']">
+    Back to Store
+</a>
+<a [routerLink]="['/store/cart']">
+    View my Cart
+</a>
+<div *ngIf="game">
+    <h3>{{ game.name }}</h3>
+    <button (click)="addToCart(game)">
+        Buy
+    </button>
+</div>
