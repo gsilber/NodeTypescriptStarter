@@ -2,6 +2,11 @@
     <a [routerLink]="['cart']">
         View my Cart
     </a>
+    <div [style.background-image]="'url(' + games[0].imageSrc + ')'" class='featured-games'>
+        <h1 class='featured-games__title'>
+            {{ games[0].name }}
+        </h1>
+    </div>
     <div *ngFor="let game of games; index as id">
         <a [routerLink]="['/store', id]">
             {{ game.name }}
