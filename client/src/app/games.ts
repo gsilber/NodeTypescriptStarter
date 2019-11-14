@@ -1,23 +1,59 @@
 export const games = [
     {
-        name: 'Lockpicking simulator',
-        price: 2.00,
+        name: 'Apex Legends',
+        price: 1.99,
         description: 'When you gotta simulate them lockpicks',
-        imageSrc: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
+        imgBanner: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
+        imgProfile: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
     },
     {
         name: 'League of Legends',
         price: 0,
-        description: 'Salt simulator 2019'
+        description: 'Salt simulator 2019',
+        imgBanner: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
+        imgProfile: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
     },
     {
         name: 'Minecraft',
         price: 29.99,
-        description: 'Fortnite bad'
+        description: 'Fortnite bad',
+        imgBanner: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
+        imgProfile: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
     },
     {
-        name: 'Apex Legends',
+        name: 'FTL',
         price: 0,
-        description: 'Imagine playing apex in 2019'
-    }
+        description: 'Faster Than Light',
+        imgBanner: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
+        imgProfile: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
+    },
+    {
+        name: 'Minecraft 2',
+        price: 29.99,
+        description: 'Fortnite bad',
+        imgBanner: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
+        imgProfile: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
+    },
+    {
+        name: 'Minecraft 3',
+        price: 29.99,
+        description: 'Fortnite bad',
+        imgBanner: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
+        imgProfile: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
+    },
+    {
+        name: 'Minecraft 4',
+        price: 29.99,
+        description: 'Fortnite bad',
+        imgBanner: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
+        imgProfile: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
+    },
+    {
+        name: 'Minecraft 5',
+        price: 29.99,
+        description: 'Fortnite bad',
+        imgBanner: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
+        imgProfile: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
+    },
+    
   ]
