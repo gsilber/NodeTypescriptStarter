@@ -1,15 +1,15 @@
 .nav{
     z-index: 10;
     width: 100%;
-    height: 48px;
+    height: 60px;
     text-decoration: none;
-    background-color: rgba(255,255,255,.75);
     backdrop-filter: blur(16px);
     position: fixed;
     top: 0;
 }
 
 .list-links{
+    height: 100%;
     display: flex;
     justify-content: flex-start;
 }
@@ -21,12 +21,33 @@
 }
 
 .link{
-    padding: 15px;
+    height: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    font-size: 1.5rem;
     text-decoration: inherit;
     color: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .fix-nav-padding{
     width: 100%;
-    height: 48px;
+    height: 60px;
+}
+
+@media(prefers-color-scheme: light){
+    .nav{
+        background-color: rgba(255,255,255,.75);
+    }
+}
+
+@media(prefers-color-scheme: dark){
+    .nav{
+        background-color: rgba(20,20,20,.65);
+        color: white;
+    }
 }

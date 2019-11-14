@@ -63,9 +63,6 @@ html{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-body{
-  background-color: rgb(255,255,255);
-}
 main{
   min-height: 100vh;
 }
@@ -108,4 +105,22 @@ p{
 	/* doesn't matter what text it is, never have long lines of text, it's hard to read */
 	word-wrap: break-word;
   max-width: 55ch;
+}
+
+
+@media(prefers-color-scheme: light){
+  body{
+    background-color: white;
+  }
+  h1, h2, h3, h4, h5, h6, p{
+    color: black;
+  }
+}
+@media(prefers-color-scheme: dark){
+  body{
+    background-color: rgb(20,20,20);
+  }
+  h1, h2, h3, h4, h5, h6, p{
+    color: white;
+  }
 }

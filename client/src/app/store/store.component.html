@@ -1,18 +1,41 @@
-<div>
+<div class='content'>
+    <div [routerLink]="['0']" [style.background-image]="'url(' + featuredGame.imgBanner + ')'" class='featured-games'>
+        <h1 class='featured-games__title'>
+            {{ featuredGame.name }}
+        </h1>
+    </div>
+
     <a [routerLink]="['cart']">
         View my Cart
     </a>
-    <div [style.background-image]="'url(' + games[0].imageSrc + ')'" class='featured-games'>
-        <h1 class='featured-games__title'>
-            {{ games[0].name }}
-        </h1>
+
+    <h1>
+        Recommended For You
+    </h1>
+
+    <div class='highlighted-games'>
+        <div *ngFor="let game of highlightedGames; index as id" class='highlighted-games__game'>
+            <a [routerLink]="['/store', id]" class='highlighted-games__link' [style.background-image]="'url(' + game.imgProfile + ')'">
+                <h3 class='highlighted-games__game__title'>
+                    {{ game.name }}
+                </h3>
+            </a>
+        </div>
     </div>
-    <div *ngFor="let game of games; index as id">
-        <a [routerLink]="['/store', id]">
-            {{ game.name }}
-            <button (click)="test()">
-                button
-            </button>
-        </a>
+
+    <h1>
+        All Games
+    </h1>
+
+    <div class='listed-games'>
+        <div *ngFor="let game of listedGames; index as id">
+            <a [routerLink]="['/store', 1]">
+                {{ id }}
+                {{ game.name }}
+                <button (click)="test()">
+                    button
+                </button>
+            </a>
+        </div>
     </div>
 </div>

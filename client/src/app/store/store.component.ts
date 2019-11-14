@@ -8,9 +8,18 @@ import { games } from '../games';
 })
 
 export class StoreComponent implements OnInit {
-  games = games;
+  featuredGame;
+  highlightedGames = [];
+  listedGames = [];
+  allGames = [];
+  //games = games;
 
-  constructor() { }
+  constructor() {
+    this.allGames = games;
+    this.featuredGame = this.allGames[0];
+    this.highlightedGames = this.allGames.slice(1, 6);
+    this.listedGames = this.allGames.slice(6);
+  }
 
   ngOnInit() {
     //TODO: make this store component call the API to get the games we have
