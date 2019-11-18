@@ -1,9 +1,12 @@
-import mongoose from "mongoose";
-import bcrypt from "bcrypt";
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
+import { GameDocument } from './game';
 
 export type UserDocument = mongoose.Document & {
+    admin: Boolean;
     developer: Boolean;
     email: string;
+    games?: [GameDocument['_id']];
     password: String;
 
     profile: {
@@ -20,24 +23,35 @@ export type UserDocument = mongoose.Document & {
 };
 
 const UserSchema = new mongoose.Schema({
-    developer: { type: Boolean},
+    admin: { type: Boolean },
+    developer: { type: Boolean },
     email: {
         lowercase: true,
         required: true,
         type: String,
         unique: true
     },
+    games: [{
+        ref: 'Game',
+        type: mongoose.Types.ObjectId
+    }],
     password: {
         required: true,
         type: String
     },
     profile: {
-        firstName: { type: String },
-        lastName: { type: String }
+        firstName: { 
+            required: true,
+            type: String 
+        },
+        lastName: { 
+            required: true,
+            type: String 
+        }
     },
     resetPasswordExpires: { type: Date },
     resetPasswordToken: { type: String },
-    status: { type: String}
+    status: { type: String }
 
 }, { timestamps: true });
 
@@ -64,15 +78,15 @@ const comparePassword: comparePasswordFunction = function (candidatePassword, cb
 
 UserSchema.methods.comparePassword = comparePassword;
 
-UserSchema.methods.toJson = function () {
+UserSchema.methods.toJSON = function () {
     return {
-      _id: this._id,
-      firstName: this.profile.firstName,
-      lastName: this.profile.lastName,
-      email: this.email,
-      status: this.status,
-      developer: this.developer
+        _id: this._id,
+        firstName: this.profile.firstName,
+        lastName: this.profile.lastName,
+        email: this.email,
+        status: this.status,
+        developer: this.developer
     }
-  }
+}
 
-  export const User = mongoose.model<UserDocument>("User", UserSchema);
+export const User = mongoose.model<UserDocument>("User", UserSchema);

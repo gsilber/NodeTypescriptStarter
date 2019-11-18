@@ -8,8 +8,8 @@ export type GameDocument = mongoose.Document & {
     developer: UserDocument['_id'];
     title: string;
     description: string;
-    
-    data:{
+
+    data: {
         times_played: number;
         icon: Url;
         background: Url;
@@ -27,7 +27,7 @@ const GameSchema = new mongoose.Schema({
     title: String,
     description: String,
 
-    data:{
+    data: {
         times_played: {
             default: 0,
             type: Number,
@@ -43,16 +43,16 @@ const GameSchema = new mongoose.Schema({
 
 }, { timestamps: true });
 
-GameSchema.methods.toJson = function () {
+GameSchema.methods.toJSON = function () {
     return {
-      title: this.title,
-      description: this.description,
-      developer: this.developer,
-      times_played: this.data.times_played,
-      icon: this.data.icon,
-      background: this.data.background,
-      reviews: this.reviews,
+        title: this.title,
+        description: this.description,
+        developer: this.developer,
+        times_played: this.data.times_played,
+        icon: this.data.icon,
+        background: this.data.background,
+        reviews: this.reviews,
     }
-  }
+}
 
-  export const Game = mongoose.model<GameDocument>("Game", GameSchema);
+export const Game = mongoose.model<GameDocument>("Game", GameSchema);
