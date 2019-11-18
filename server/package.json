@@ -2,7 +2,7 @@
   "name": "ActuallyGoodLauncher",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/server.js",
+  "main": "dist/index.js",
   "dependencies": {
     "@types/jsonwebtoken": "^8.3.5",
     "bcrypt": "^3.0.6",
@@ -34,12 +34,12 @@
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
     "tsc": "tsc",
     "build": "npm-run-all clean lint tsc",
-    "dev-deb": "ts-node-dev --respawn --transpileOnly --nolazy --inspect-brk=5858 ./src/server.ts",
-    "dev": "ts-node-dev --respawn --transpileOnly ./src/server.ts",
+    "dev-deb": "ts-node-dev --respawn --transpileOnly --nolazy --inspect-brk=5858 ./src/index.ts",
+    "dev": "ts-node-dev --respawn --transpileOnly ./src/index.ts",
     "prod": "npm-run-all build start",
     "prod-deb": "npm-run-all start-deb",
-    "start": "nodemon --nolazy ./dist/server.js",
-    "start-deb": "nodemon --nolazy --inspect-brk=5858 ./dist/server.js",
+    "start": "nodemon --nolazy ./dist/index.js",
+    "start-deb": "nodemon --nolazy --inspect-brk=5858 ./dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
