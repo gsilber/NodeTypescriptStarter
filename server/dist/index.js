@@ -53,4 +53,4 @@ class Application {
     }
 }
 new Application().start();
-//# sourceMappingURL=server.js.map
+//# sourceMappingURL=index.js.map
