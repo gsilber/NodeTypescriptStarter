@@ -5,12 +5,6 @@ import { User, UserDocument } from "../model/user";
 
 export class UserController {
 
-    public authorize(req: Request, res: Response, next: NextFunction) {
-        return res.status(200).json({
-            validated: true
-        });
-    }
-
     // ========================================
     // Login Route
     // ========================================
@@ -40,7 +34,6 @@ export class UserController {
         const password = req.body.password;
         const firstName = req.body.firstName;
         const lastName = req.body.lastName;
-        const status = req.body.status;
 
         if (!email) {
             return res.status(422).send({ error: "You must enter an email address." });
@@ -51,9 +44,6 @@ export class UserController {
         if (!password) {
             return res.status(422).send({ error: "You must enter a password." });
         }
-        if (!status) {
-            return res.status(422).send({ error: "You must enter a status." });
-        }
 
         User.findOne({ email }, function(err, existingUser) {
             if (err) { return next(err); }
@@ -63,12 +53,14 @@ export class UserController {
             } else {
                 const user = new User({
                     admin: false,
-                    developer: false,
-                    email,
-                    game: [{}],
                     password,
-                    status,
-                    profile: { firstName, lastName }
+                    profile: { 
+                        email,
+                        developer: false,
+                        firstName, 
+                        lastName,
+                        game: [{}],
+                    }
                 });
                 user.save(function(err, user) {
                     if (err) { return next(err); }

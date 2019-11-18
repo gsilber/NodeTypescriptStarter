@@ -4,15 +4,14 @@ import { GameDocument } from "./game";
 
 export type UserDocument = mongoose.Document & {
     admin: boolean;
-    developer: boolean;
-    email: string;
-    games?: [GameDocument["_id"]];
     password: string;
 
     profile: {
+        email: string,
+        developer: boolean,
         firstName: string,
         lastName: string,
-        status: string
+        games?: [GameDocument["_id"]]
     };
 
     resetPasswordExpires: string;
@@ -26,25 +25,21 @@ const UserSchema = new mongoose.Schema({
         required: true,
         type: Boolean
     },
-    developer: {
-        required: true,
-        type: Boolean
-    },
-    email: {
-        lowercase: true,
-        required: true,
-        type: String,
-        unique: true
-    },
-    games: [{
-        ref: "Game",
-        type: mongoose.Types.ObjectId
-    }],
     password: {
         required: true,
         type: String
     },
     profile: {
+        developer: {
+            required: true,
+            type: Boolean
+        },
+        email: {
+            lowercase: true,
+            required: true,
+            type: String,
+            unique: true
+        },
         firstName: {
             required: true,
             type: String
@@ -53,9 +48,10 @@ const UserSchema = new mongoose.Schema({
             required: true,
             type: String
         },
-        status: {
-            type: String
-        }
+        games: [{
+            ref: "Game",
+            type: mongoose.Types.ObjectId
+        }],
     },
     resetPasswordExpires: { type: Date },
     resetPasswordToken: { type: String },
@@ -89,12 +85,12 @@ UserSchema.methods.toJSON = function() {
     return {
         _id: this._id,
         profile: {
+            email: this.email,
+            developer: this.developer,
             firstName: this.profile.firstName,
             lastName: this.profile.lastName,
-            status: this.status
+            games: this.profile.games
         },
-        email: this.email,
-        developer: this.developer
     };
 };
 
