@@ -1,30 +1,35 @@
-import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
-import { GameDocument } from './game';
+import bcrypt from "bcrypt";
+import mongoose from "mongoose";
+import { GameDocument } from "./game";
 
 export type UserDocument = mongoose.Document & {
-    admin: Boolean;
-    developer: Boolean;
+    admin: boolean;
+    developer: boolean;
     email: string;
-    games?: [GameDocument['_id']];
-    password: String;
+    games?: [GameDocument["_id"]];
+    password: string;
 
     profile: {
-        firstName: String,
-        lastName: String
+        firstName: string,
+        lastName: string,
+        status: string
     };
 
     resetPasswordExpires: string;
     resetPasswordToken: string;
 
-    status: string
-
     comparePassword: comparePasswordFunction;
 };
 
 const UserSchema = new mongoose.Schema({
-    admin: { type: Boolean },
-    developer: { type: Boolean },
+    admin: {
+        required: true,
+        type: Boolean
+    },
+    developer: {
+        required: true,
+        type: Boolean
+    },
     email: {
         lowercase: true,
         required: true,
@@ -32,7 +37,7 @@ const UserSchema = new mongoose.Schema({
         unique: true
     },
     games: [{
-        ref: 'Game',
+        ref: "Game",
         type: mongoose.Types.ObjectId
     }],
     password: {
@@ -40,18 +45,20 @@ const UserSchema = new mongoose.Schema({
         type: String
     },
     profile: {
-        firstName: { 
+        firstName: {
             required: true,
-            type: String 
+            type: String
         },
-        lastName: { 
+        lastName: {
             required: true,
-            type: String 
+            type: String
+        },
+        status: {
+            type: String
         }
     },
     resetPasswordExpires: { type: Date },
     resetPasswordToken: { type: String },
-    status: { type: String }
 
 }, { timestamps: true });
 
@@ -70,7 +77,7 @@ UserSchema.pre("save", function save(next) {
     });
 });
 
-const comparePassword: comparePasswordFunction = function (candidatePassword, cb) {
+const comparePassword: comparePasswordFunction = function(candidatePassword, cb) {
     bcrypt.compare(candidatePassword, this.password, (err: mongoose.Error, isMatch: boolean) => {
         cb(err, isMatch);
     });
@@ -78,15 +85,17 @@ const comparePassword: comparePasswordFunction = function (candidatePassword, cb
 
 UserSchema.methods.comparePassword = comparePassword;
 
-UserSchema.methods.toJSON = function () {
+UserSchema.methods.toJSON = function() {
     return {
         _id: this._id,
-        firstName: this.profile.firstName,
-        lastName: this.profile.lastName,
+        profile: {
+            firstName: this.profile.firstName,
+            lastName: this.profile.lastName,
+            status: this.status
+        },
         email: this.email,
-        status: this.status,
         developer: this.developer
-    }
-}
+    };
+};
 
 export const User = mongoose.model<UserDocument>("User", UserSchema);

@@ -1,39 +1,23 @@
-import mongoose from "mongoose";
-import { Url } from "url";
-import { CommentDocument } from "./comment";
-import { UserDocument } from "./user";
-
-export type GameDocument = mongoose.Document & {
-    developer: UserDocument["_id"];
-    title: string;
-    description: string;
-
-    data: {
-        times_played: number;
-        icon: Url;
-        background: Url;
-    }
-
-    reviews?: [CommentDocument["_id"]];
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-
-const GameSchema = new mongoose.Schema({
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = __importDefault(require("mongoose"));
+const GameSchema = new mongoose_1.default.Schema({
     developer: {
         ref: "User",
-        type: mongoose.Types.ObjectId,
+        type: mongoose_1.default.Types.ObjectId,
         required: true
     },
-
     title: {
         type: String,
         required: true
     },
-
     description: {
         type: String,
         required: true
     },
-
     data: {
         times_played: {
             default: 0,
@@ -42,15 +26,12 @@ const GameSchema = new mongoose.Schema({
         icon: String,
         background: String,
     },
-
     reviews: [{
-        ref: "Comment",
-        type: mongoose.Types.ObjectId
-    }],
-
+            ref: "Comment",
+            type: mongoose_1.default.Types.ObjectId
+        }],
 }, { timestamps: true });
-
-GameSchema.methods.toJSON = function() {
+GameSchema.methods.toJSON = function () {
     return {
         title: this.title,
         description: this.description,
@@ -61,8 +42,7 @@ GameSchema.methods.toJSON = function() {
             background: this.data.background,
             reviews: this.reviews
         },
-
     };
 };
-
-export const Game = mongoose.model<GameDocument>("Game", GameSchema);
+exports.Game = mongoose_1.default.model("Game", GameSchema);
+//# sourceMappingURL=game.js.map

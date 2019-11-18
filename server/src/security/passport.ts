@@ -1,7 +1,7 @@
-import config from "../config/config";
-import passport from "passport";
 import mongoose from "mongoose";
+import passport from "passport";
 import passportJWT from "passport-jwt";
+import config from "../config/config";
 import { User } from "../model/user";
 
 const jwtOptions = {
@@ -10,9 +10,9 @@ const jwtOptions = {
 };
 
 // Setting up JWT login strategy
-const JWTLogin = new passportJWT.Strategy(jwtOptions, function (payload, done) {
-    let id = new mongoose.Types.ObjectId(payload._id);
-    User.findById(id, function (err, user) {
+const JWTLogin = new passportJWT.Strategy(jwtOptions, function(payload, done) {
+    const id = new mongoose.Types.ObjectId(payload._id);
+    User.findById(id, function(err, user) {
         if (err) { return done(err, false); }
 
         if (user) {
@@ -24,4 +24,4 @@ const JWTLogin = new passportJWT.Strategy(jwtOptions, function (payload, done) {
 });
 
 passport.use(JWTLogin);
-exports.requireAuth = passport.authenticate('jwt', { session: false });       
+exports.requireAuth = passport.authenticate("jwt", { session: false });

@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-
 export type CommentDocument = mongoose.Document & {
     title: string;
     body: string;
@@ -25,12 +24,12 @@ const CommentSchema = new mongoose.Schema({
 
 }, { timestamps: true });
 
-CommentSchema.methods.toJson = function () {
+CommentSchema.methods.toJson = function() {
     return {
       title: this.title,
       body: this.body,
       rating: this.rating
-    }
-  }
+    };
+  };
 
-  export const Game = mongoose.model<CommentDocument>("Comment", CommentSchema);
+export const Game = mongoose.model<CommentDocument>("Comment", CommentSchema);

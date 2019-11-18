@@ -1,13 +1,8 @@
 import { Request, Response } from "express";
 import mongoose from "mongoose";
-import { Game, GameDocument } from "../model/game";
 import passportJWT from "passport-jwt";
 import config from "../config/config";
-
-const jwtOptions = {
-    jwtFromRequest: passportJWT.ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: config.secret
-};
+import { Game, GameDocument } from "../model/game";
 
 export class UserController {
     public addNewGame(req: Request, res: Response) {
