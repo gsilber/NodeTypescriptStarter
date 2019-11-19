@@ -3,7 +3,8 @@ import express from "express";
 import mongoose from "mongoose";
 import config from "./config/config";
 
-import {UserRouter} from "./router/user";
+import { UserRouter } from "./router/user";
+import { GameRouter } from "./router/game";
 
 class Application {
     public app: express.Application;
@@ -28,7 +29,7 @@ class Application {
     // but should be setup correctly anyway.  Without this, angular would not be able to access the api it it is on
     // another server.
     public initCors(): void {
-        this.app.use(function(req: express.Request, res: express.Response, next: any) {
+        this.app.use(function (req: express.Request, res: express.Response, next: any) {
             res.header("Access-Control-Allow-Origin", "*");
             res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
             res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials");
@@ -39,22 +40,23 @@ class Application {
     // setup routes for the express server
     public buildRoutes(): void {
         this.app.use("/account", new UserRouter().getRouter());
+        this.app.use("/games", new GameRouter().getRouter());
     }
 
     private mongoSetup(): void {
         mongoose.Promise = global.Promise;
         mongoose
-        .connect(
-            config.database,
-            {
-                useCreateIndex: true,
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-                useFindAndModify: false
-            }
-        )
-        .then(() => console.log("MongoDB connected..."))
-        .catch((err) => console.log(err));
+            .connect(
+                config.database,
+                {
+                    useCreateIndex: true,
+                    useNewUrlParser: true,
+                    useUnifiedTopology: true,
+                    useFindAndModify: false
+                }
+            )
+            .then(() => console.log("MongoDB connected..."))
+            .catch((err) => console.log(err));
     }
 }
 new Application().start();

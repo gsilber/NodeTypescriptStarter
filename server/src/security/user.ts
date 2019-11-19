@@ -1,4 +1,4 @@
-import { User, UserDocument } from "../model/user";
+import { User } from "../model/user";
 import { NextFunction, Request, Response } from "express";
 
 export class UserAuthorization {
@@ -30,6 +30,10 @@ export class UserAuthorization {
         const currentUser = new User(req.user);
     
         if (currentUser.profile.admin){
+            return next();
+        }
+
+        if (currentUser.id === req.params['userId']){
             return next();
         }
 

@@ -54,14 +54,14 @@ export class UserController {
 
             } else {
                 const user = new User({
-                    email,
-                    password,
-                    game: [{}],
+                    email: email,
+                    passpword: password,
+                    games: [{}],
                     profile: {
                         admin: false,
                         developer: false,
-                        firstName,
-                        lastName
+                        firstName: firstName,
+                        lastName: lastName
                     }
                 });
                 user.save(function (err, user) {
@@ -86,7 +86,7 @@ export class UserController {
     }
 
     public getUserById(req: Request, res: Response) {
-        User.findById({ _id: req.params.userId }, req.body, { new: true }, (err, user) => {
+        User.findOne({ _id: req.params.userId }, req.body, { new: true }, (err, user) => {
             if (err) {
                 res.send(err);
             }
@@ -96,7 +96,7 @@ export class UserController {
 
     public updateUser(req: Request, res: Response) {
 
-        User.findById({ _id: req.params.userId }, req.body, { new: true }, (err, user) => {
+        User.findOne({ _id: req.params.userId }, (err, user) => {
             if (err) {
                 res.send(err);
             }

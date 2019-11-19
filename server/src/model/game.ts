@@ -38,9 +38,11 @@ const GameSchema = new mongoose.Schema({
         times_played: {
             default: 0,
             type: Number,
+            required: true
         },
         icon: String,
         background: String,
+        required: true
     },
 
     reviews: [{
