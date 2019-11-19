@@ -3,15 +3,16 @@ import mongoose from "mongoose";
 import { GameDocument } from "./game";
 
 export type UserDocument = mongoose.Document & {
-    admin: boolean;
+    
+    email: string;
     password: string;
+    games?: [GameDocument["_id"]];
 
     profile: {
-        email: string,
+        admin: boolean,
         developer: boolean,
         firstName: string,
-        lastName: string,
-        games?: [GameDocument["_id"]]
+        lastName: string
     };
 
     resetPasswordExpires: string;
@@ -21,24 +22,29 @@ export type UserDocument = mongoose.Document & {
 };
 
 const UserSchema = new mongoose.Schema({
-    admin: {
+    
+    email: {
+        lowercase: true,
         required: true,
-        type: Boolean
+        type: String,
+        unique: true
     },
     password: {
         required: true,
         type: String
     },
+    games: [{
+        ref: "Game",
+        type: mongoose.Types.ObjectId
+    }],
     profile: {
-        developer: {
+        admin: {
             required: true,
             type: Boolean
         },
-        email: {
-            lowercase: true,
+        developer: {
             required: true,
-            type: String,
-            unique: true
+            type: Boolean
         },
         firstName: {
             required: true,
@@ -47,11 +53,7 @@ const UserSchema = new mongoose.Schema({
         lastName: {
             required: true,
             type: String
-        },
-        games: [{
-            ref: "Game",
-            type: mongoose.Types.ObjectId
-        }],
+        }
     },
     resetPasswordExpires: { type: Date },
     resetPasswordToken: { type: String },
@@ -84,12 +86,13 @@ UserSchema.methods.comparePassword = comparePassword;
 UserSchema.methods.toJSON = function() {
     return {
         _id: this._id,
+        email: this.email,
+        games: this.profile.games,
         profile: {
-            email: this.email,
-            developer: this.developer,
+            admin: this.profile.admin,
+            developer: this.profile.developer,
             firstName: this.profile.firstName,
-            lastName: this.profile.lastName,
-            games: this.profile.games
+            lastName: this.profile.lastName
         },
     };
 };

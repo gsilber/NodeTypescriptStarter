@@ -1,18 +1,20 @@
 import { NextFunction, Request, Response } from "express";
 import jsonwebtoken from "jsonwebtoken";
 import config from "../config/config";
-import { User, UserDocument } from "../model/user";
+import { User } from "../model/user";
 
 export class UserController {
+    public generateToken(user: JSON) {
+        return jsonwebtoken.sign(user, config.secret, {
+            expiresIn: 10080 // in seconds
+        });
+    }
 
-    // ========================================
-    // Login Route
-    // ========================================
     public postLogin(req: Request, res: Response, next: NextFunction) {
-        User.findOne({ email: req.body.email }, function(err, user) {
+        User.findOne({ email: req.body.email }, function (err, user) {
             if (err) { return res.status(400).json({ error: "bad data" }); }
             if (!user) { return res.status(400).json({ error: "Your login details could not be verified. Please try again." }); }
-            user.comparePassword(req.body.password, function(err, isMatch) {
+            user.comparePassword(req.body.password, function (err, isMatch) {
                 if (err) { return res.status(400).json({ error: "bad data" }); }
                 if (!isMatch) { return res.status(400).json({ error: "Your login details could not be verified. Please try again." }); }
 
@@ -45,24 +47,24 @@ export class UserController {
             return res.status(422).send({ error: "You must enter a password." });
         }
 
-        User.findOne({ email }, function(err, existingUser) {
+        User.findOne({ 'email': email }, function (err, existingUser) {
             if (err) { return next(err); }
             if (existingUser) {
                 return res.status(422).send({ error: "This email address is already registered." });
 
             } else {
                 const user = new User({
-                    admin: false,
+                    email,
                     password,
-                    profile: { 
-                        email,
+                    game: [{}],
+                    profile: {
+                        admin: false,
                         developer: false,
-                        firstName, 
-                        lastName,
-                        game: [{}],
+                        firstName,
+                        lastName
                     }
                 });
-                user.save(function(err, user) {
+                user.save(function (err, user) {
                     if (err) { return next(err); }
                     const userInfo = user.toJSON();
                     res.status(201).json({
