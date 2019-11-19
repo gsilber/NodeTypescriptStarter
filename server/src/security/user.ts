@@ -1,7 +1,6 @@
 import { User, UserDocument } from "../model/user";
 import { NextFunction, Request, Response } from "express";
 
-// Authorization check
 export class UserAuthorization {
     public updateUser(req: Request, res: Response, next: NextFunction){
         if (!req.user) {

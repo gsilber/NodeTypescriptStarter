@@ -58,10 +58,9 @@ GameSchema.methods.toJSON = function() {
         data: {
             times_played: this.data.times_played,
             icon: this.data.icon,
-            background: this.data.background,
-            reviews: this.reviews
+            background: this.data.background
         },
-
+        reviews: this.reviews
     };
 };
 

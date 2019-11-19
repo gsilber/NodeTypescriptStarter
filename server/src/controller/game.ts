@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
-import mongoose from "mongoose";
-import passportJWT from "passport-jwt";
+import { NextFunction, Request, Response } from "express";
+import jsonwebtoken from "jsonwebtoken";
 import config from "../config/config";
+import { User } from "../model/user";
 import { Game, GameDocument } from "../model/game";
 
 export class UserController {

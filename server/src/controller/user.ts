@@ -95,11 +95,36 @@ export class UserController {
     }
 
     public updateUser(req: Request, res: Response) {
-        User.findOneAndUpdate({ _id: req.params.userId }, req.body, { new: true }, (err, user) => {
+
+        User.findById({ _id: req.params.userId }, req.body, { new: true }, (err, user) => {
             if (err) {
                 res.send(err);
             }
-            res.json(user);
+
+            if ('email' in req.body){
+                user.email = req.body.email;
+            }
+
+            if ('firstName' in req.body){
+                user.profile.firstName = req.body.firstName;
+            }
+
+            if ('lastName' in req.body){
+                user.profile.lastName = req.body.lastName;
+            }
+
+            const currentUser = new User(req.user);
+
+            if (currentUser.profile.admin && 'developer' in req.body){
+                user.profile.developer = req.body.developer;
+            }
+
+            user.save((err, updatedUser) => {
+                if (err) {
+                    res.send(err);
+                }
+                res.json(updatedUser);
+            })
         });
     }
 
