@@ -4,15 +4,23 @@ import { LandingComponent } from './landing/landing.component';
 import { StoreComponent } from './store/store.component';
 import { LibraryComponent } from './library/library.component';
 import { GameComponent } from './game/game.component';
+import { CartComponent } from './cart/cart.component';
+import { LoginComponent } from './login/login.component';
+import { HeaderComponent } from './header/header.component';
 
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', component: LandingComponent},
-  {path: 'store', children: [
-    {path: '', component: StoreComponent},
-    {path: ':id', component: GameComponent}
+  {path: '', children:[
+    {path: '', component: HeaderComponent, outlet: 'header'},
+    {path: 'login', component: LoginComponent},
+    {path: 'store', children: [
+      {path: '', component: StoreComponent},
+      {path: 'cart', component: CartComponent},
+      {path: ':id', component: GameComponent}
+    ]},
+    {path: 'library', component: LibraryComponent}
   ]},
-  {path: 'library', component: LibraryComponent}
 ];
 
 @NgModule({
