@@ -55,5 +55,33 @@ export const games = [
         imgBanner: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
         imgProfile: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
     },
+    {
+        name: 'Minecraft 5',
+        price: 29.99,
+        description: 'Fortnite bad',
+        imgBanner: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
+        imgProfile: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
+    },
+    {
+        name: 'Minecraft 5',
+        price: 29.99,
+        description: 'Fortnite bad',
+        imgBanner: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
+        imgProfile: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
+    },
+    {
+        name: 'Minecraft 5',
+        price: 29.99,
+        description: 'Fortnite bad',
+        imgBanner: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
+        imgProfile: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
+    },
+    {
+        name: 'Minecraft 5',
+        price: 29.99,
+        description: 'Fortnite bad',
+        imgBanner: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
+        imgProfile: 'https://images6.alphacoders.com/992/thumb-1920-992033.jpg',
+    },
     
   ]

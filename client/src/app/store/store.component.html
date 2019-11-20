@@ -13,29 +13,31 @@
         Recommended For You
     </h1>
 
-    <div class='highlighted-games'>
-        <div *ngFor="let game of highlightedGames; index as id" class='highlighted-games__game'>
+    <ul class='highlighted-games'>
+        <li *ngFor="let game of highlightedGames; index as id" class='highlighted-games__game'>
             <a [routerLink]="['/store', id]" class='highlighted-games__link' [style.background-image]="'url(' + game.imgProfile + ')'">
                 <h3 class='highlighted-games__game__title'>
                     {{ game.name }}
                 </h3>
             </a>
-        </div>
-    </div>
+        </li>
+    </ul>
 
     <h1>
         All Games
     </h1>
 
-    <div class='listed-games'>
-        <div *ngFor="let game of listedGames; index as id">
-            <a [routerLink]="['/store', 1]">
-                {{ id }}
-                {{ game.name }}
-                <button (click)="test()">
-                    button
+    <ul class='listed-games'>
+        <li *ngFor="let game of listedGames; index as id">
+            <a [routerLink]="['/store', id]" class='listed-games__link'>
+                <span>
+                    {{ game.name }}
+                    {{ game.price }}
+                </span>
+                <button>
+                    Buy
                 </button>
             </a>
-        </div>
-    </div>
+        </li>
+    </ul>
 </div>
