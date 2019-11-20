@@ -1,0 +1,110 @@
+.content{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem 3rem;
+}
+
+.content > h1{
+    padding-left: 8vw;
+    margin-top: 3rem;
+}
+
+.featured-games{
+    width: 100vw;
+    height: 42.85vw;
+    /*background-color: rgb(255,255,255);*/
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding: 2rem;
+    color: white;
+    /*background-image: url('https://images6.alphacoders.com/992/thumb-1920-992033.jpg');*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 4px 14px 4px rgba(0,0,0,.2);
+}
+
+.featured-games__title{
+    color: inherit;
+    text-shadow: 0px 2px 10px rgba(0,0,0,.65);
+}
+.featured-games__buy-button{
+    margin-left: auto;
+    color: black;
+    /*background: none;*/
+    border-radius: 8px;
+    padding: .7rem;
+    background-color: rgba(255,255,255,.8);
+    backdrop-filter: blur(16px);
+    box-shadow: 0px 2px 14px 4px rgba(0,0,0,.2);
+}
+
+
+
+.highlighted-games{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-items: center;
+    gap: 1rem 0;
+}
+
+.highlighted-games__link{
+    word-wrap: break-word;
+    text-decoration: none;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 23vw;
+    height: 40.8vw;
+    /*padding-bottom: calc(100% * 1.78);*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border-radius: 1.5rem;
+    box-shadow: 0 2px 8px 4px rgba(0,0,0,.2);
+    transition: width .2s, height .2s;
+}
+.highlighted-games__link:hover{
+    width: 23.2vw;
+    height: 41vw;
+}
+
+.highlighted-games__game__title{
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 550;
+    /*padding-top: calc(100% * 1.78);*/
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    text-shadow: 0px 2px 10px rgba(0,0,0,.75);
+}
+
+.listed-games{
+    width: 100%;
+    padding-left: 8vw;
+    padding-right: 8vw;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem 1rem;
+}
+.listed-games__link{
+    display: flex;
+    padding: 1rem;
+    background-color: rgba(0,200,5,.3);
+}
+.listed-games__link > span{
+    width: 100%;
+}
+.listed-games__link > button{
+    justify-self: flex-end;
+}
+
+@media(prefers-color-scheme: light){
+    
+}
+@media(prefers-color_scheme: dark){
+    
+}

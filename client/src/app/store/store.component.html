@@ -1,1 +1,43 @@
-<p>store works!</p>
+<div class='content'>
+    <div [routerLink]="['0']" [style.background-image]="'url(' + featuredGame.imgBanner + ')'" class='featured-games'>
+        <h1 class='featured-games__title'>
+            {{ featuredGame.name }}
+        </h1>
+    </div>
+
+    <a [routerLink]="['cart']">
+        View my Cart
+    </a>
+
+    <h1>
+        Recommended For You
+    </h1>
+
+    <ul class='highlighted-games'>
+        <li *ngFor="let game of highlightedGames; index as id" class='highlighted-games__game'>
+            <a [routerLink]="['/store', id]" class='highlighted-games__link' [style.background-image]="'url(' + game.imgProfile + ')'">
+                <h3 class='highlighted-games__game__title'>
+                    {{ game.name }}
+                </h3>
+            </a>
+        </li>
+    </ul>
+
+    <h1>
+        All Games
+    </h1>
+
+    <ul class='listed-games'>
+        <li *ngFor="let game of listedGames; index as id">
+            <a [routerLink]="['/store', id]" class='listed-games__link'>
+                <span>
+                    {{ game.name }}
+                    {{ game.price }}
+                </span>
+                <button>
+                    Buy
+                </button>
+            </a>
+        </li>
+    </ul>
+</div>
