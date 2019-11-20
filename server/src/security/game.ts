@@ -4,7 +4,7 @@ import { NextFunction, Request, Response } from "express";
 
 // Authorization check
 export class GameAuthorization {
-    public addGame(req: Request, res: Response, next: NextFunction){
+    public addNewGame(req: Request, res: Response, next: NextFunction){
         const currentUser = new User(req.user);
 
         if (currentUser.profile.admin || currentUser.profile.developer){
