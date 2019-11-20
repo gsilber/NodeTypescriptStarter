@@ -19,30 +19,35 @@ export type GameDocument = mongoose.Document & {
 
 const GameSchema = new mongoose.Schema({
     developer: {
+        required: true,
         ref: "User",
         type: mongoose.Types.ObjectId,
-        required: true
     },
 
     title: {
-        type: String,
-        required: true
+        required: true,
+        type: String
     },
 
     description: {
-        type: String,
-        required: true
+        required: true,
+        type: String
     },
 
     data: {
         times_played: {
             default: 0,
-            type: Number,
-            required: true
+            required: true,
+            type: Number
         },
-        icon: String,
-        background: String,
-        required: true
+        icon: {
+            required: true,
+            type: String
+        },
+        background: {
+            required: true,
+            type: String
+        }
     },
 
     reviews: [{

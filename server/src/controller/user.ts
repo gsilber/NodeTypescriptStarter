@@ -48,7 +48,7 @@ export class UserController {
             return res.status(422).send({ error: "You must enter a password." });
         }
 
-        User.findOne({ 'email': email }, function (err, existingUser) {
+        User.findOne({ email: email }, function (err, existingUser) {
             if (err) { return next(err); }
             if (existingUser) {
                 return res.status(422).send({ error: "This email address is already registered." });
@@ -56,8 +56,8 @@ export class UserController {
             } else {
                 const user = new User({
                     email: email,
-                    passpword: password,
-                    games: [{}],
+                    password: password,
+                    games: [],
                     profile: {
                         admin: false,
                         developer: false,

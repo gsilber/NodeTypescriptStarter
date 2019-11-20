@@ -11,8 +11,6 @@ export class UserRouter {
     // Creates the routes for this router and returns a populated router object
     public getRouter(): express.Router {
 
-        this.router.get("/:gameId/buy", requireAuth, this.userController.buyGame);
-
         this.router.get("/users", requireAuth, this.userController.getUsers);
         this.router.get("/:userId", requireAuth, this.userController.getUserById);
         this.router.put("/:userId", requireAuth, this.userAuthorization.updateUser, this.userController.updateUser);
