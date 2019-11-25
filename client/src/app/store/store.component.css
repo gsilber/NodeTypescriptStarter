@@ -65,11 +65,15 @@
     justify-content: flex-end;
     border-radius: 1.5rem;
     box-shadow: 0 2px 8px 4px rgba(0,0,0,.2);
-    transition: width .2s, height .2s;
+    transition: transform .15s, box-shadow .15s;
 }
 .highlighted-games__link:hover{
+    /*
     width: 23.2vw;
     height: 41vw;
+    */
+    transform: scale(1.02);
+    box-shadow: 0 2px 12px 8px rgba(0,0,0,.2);
 }
 
 .highlighted-games__game__title{
