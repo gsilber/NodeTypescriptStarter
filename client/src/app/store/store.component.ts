@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 import { games } from '../games';
 
 @Component({
   selector: 'app-store',
   templateUrl: './store.component.html',
-  styleUrls: ['./store.component.css']
+  styleUrls: ['./store.component.css'],
+  providers: [ApiService]
 })
 
 export class StoreComponent implements OnInit {
@@ -14,7 +16,12 @@ export class StoreComponent implements OnInit {
   allGames = [];
   //games = games;
 
-  constructor() {
+  constructor(private apiService: ApiService) {
+    console.log('calling apiservice?');
+    this.apiService.getGames().subscribe((data) => {
+      console.log(data)
+      console.log(data[0].title);
+    });
     this.allGames = games;
     this.featuredGame = this.allGames[0];
     this.highlightedGames = this.allGames.slice(1, 6);
