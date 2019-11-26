@@ -1,5 +1,5 @@
 <div class='content'>
-    <div [routerLink]="['/store',featuredGame.name]" [style.background-image]="'url(' + featuredGame.imgBanner + ')'" class='featured-games'>
+    <div *ngIf="featuredGame" [routerLink]="['/store',featuredGame.name]" [style.background-image]="'url(' + featuredGame.imgBanner + ')'" class='featured-games'>
         <h1 class='featured-games__title'>
             {{ featuredGame.name }}
         </h1>
