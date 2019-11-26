@@ -16,9 +16,15 @@ export class ApiService {
   }
 
   public getGames(){
-    console.log('inside API service');
+    //console.log('inside API service');
     return this.http.get(
       'http://localhost:3000/games',
       );
+  }
+
+  public getGame(gameID: string){
+    return this.http.get(
+      'http://localhost:3000/games/' + gameID,
+    );
   }
 }
