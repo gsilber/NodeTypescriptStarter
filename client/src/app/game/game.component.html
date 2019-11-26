@@ -1,5 +1,7 @@
 <div class='content' *ngIf="game">
-    <img class='image-banner'/>
+    <div class='image-banner' [style.background-image]="'url(' + game.imgBanner + ')'">
+
+    </div>
     <h1 class='title'>
         {{ game.title }}
     </h1>
@@ -9,7 +11,7 @@
     <p class='description'>
         {{ game.description }}
     </p>
-    <span>
+    <span class='game-info'>
         <span>
             <p>
                 Developed by:
