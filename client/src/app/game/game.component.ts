@@ -18,6 +18,7 @@ export class GameComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
+      console.log("Loading game with id: {" + params.get('id') + "}");
       this.game = games[+params.get('id')];
     });
   }
