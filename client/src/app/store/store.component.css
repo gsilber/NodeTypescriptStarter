@@ -92,18 +92,33 @@
     padding-right: 8vw;
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1rem 1rem;
+    gap: 0rem 1rem;
 }
 .listed-games__link{
     display: flex;
+    justify-content: space-between;
     padding: 1rem;
-    background-color: rgba(0,200,5,.3);
+    text-decoration: none;
+    color: black;
 }
-.listed-games__link > span{
-    width: 100%;
+.listed-games__link:hover{
+    background-color: rgb(210, 240, 255);
 }
-.listed-games__link > button{
-    justify-self: flex-end;
+
+.listed-games > li:nth-child(even){
+    background-color: rgb(230, 230, 230);
+}
+.listed-games > li:nth-child(odd){
+    background-color: rgb(210,210,210);
+}
+
+.listed-games__link__title{
+    color: inherit;
+}
+
+.listed-games__link__price{
+    color: inherit;
+    font-weight: 500;
 }
 
 @media(prefers-color-scheme: light){

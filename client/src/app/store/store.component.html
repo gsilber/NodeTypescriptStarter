@@ -31,12 +31,16 @@
         <li *ngFor="let game of listedGames; index as id">
             <a [routerLink]="['/store', game.name]" class='listed-games__link'>
                 <span>
-                    {{ game.name }}
-                    {{ game.price }}
+                    <h3 class='listed-games__link__title'>
+                        {{ game.name }}
+                    </h3>
                 </span>
-                <button>
-                    Buy
-                </button>
+                <span>
+                    <h3 class='listed-games__link__price'>
+                        {{ game.price }}
+                    </h3>
+                    
+                </span>
             </a>
         </li>
     </ul>
