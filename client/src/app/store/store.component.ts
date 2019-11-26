@@ -10,28 +10,34 @@ import { games } from '../games';
 })
 
 export class StoreComponent implements OnInit {
-  featuredGame;
+  featuredGame: Object;
   highlightedGames = [];
   listedGames = [];
-  allGames = [];
+  allGames;
   //games = games;
 
   constructor(private apiService: ApiService) {
     console.log('calling apiservice?');
     this.apiService.getGames().subscribe((data) => {
-      console.log(data)
-      console.log(data[0].title);
+      console.log(data);
+      this.allGames = data;
+      if(this.allGames.length > 5){
+        this.featuredGame = this.allGames[0];
+        this.highlightedGames = this.allGames.slice(1, 5);
+        this.listedGames = this.allGames.slice(5);
+      }
+      else{
+        console.log("Store did not receive enough games, defaulting to generic example games");
+        this.allGames = games;
+        this.featuredGame = this.allGames[0];
+        this.highlightedGames = this.allGames.slice(1, 6);
+        this.listedGames = this.allGames.slice(6);
+      }
     });
-    this.allGames = games;
-    this.featuredGame = this.allGames[0];
-    this.highlightedGames = this.allGames.slice(1, 6);
-    this.listedGames = this.allGames.slice(6);
   }
 
   ngOnInit() {
-    //TODO: make this store component call the API to get the games we have
-    //currently, all games are loaded from the games.ts file
-    //this should probably be a service because both this component and the game component use games.ts
+
   }
 
 }
