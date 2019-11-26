@@ -21,7 +21,7 @@ const routes: Routes = [
       {path: ':id', component: GameComponent}
     ]},
     {path: 'library', component: LibraryComponent},
-    {path: '', component: FooterComponent}
+    {path: '', component: FooterComponent, outlet: 'footer'}
   ]},
 ];
 
