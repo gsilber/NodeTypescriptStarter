@@ -30,8 +30,8 @@ export class StoreComponent implements OnInit {
         console.log("Store did not receive enough games, defaulting to generic example games");
         this.allGames = games;
         this.featuredGame = this.allGames[0];
-        this.highlightedGames = this.allGames.slice(1, 6);
-        this.listedGames = this.allGames.slice(6);
+        this.highlightedGames = this.allGames.slice(1, 5);
+        this.listedGames = this.allGames.slice(5);
       }
     });
   }
