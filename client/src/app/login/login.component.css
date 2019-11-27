@@ -6,9 +6,16 @@
 }
 
 form{
+    padding: 2rem;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
     display: grid;
     gap: 2rem 2rem;
-    width: 400px;
+    width: 450px;
+    /*
+    border-radius: 16px;
+    box-shadow: 0 16px 50px 8px rgba(0,0,0,.2);
+    */
 }
 
 input{
@@ -17,7 +24,7 @@ input{
     transition: box-shadow .2s, background-color .2s;
 }
 
-button{
+button, .login-error{
     padding: 1rem;
     margin-left: 1rem;
     margin-right: 1rem;
@@ -42,6 +49,13 @@ button{
         background-color: rgb(180, 210, 255);
     }
 
+    .login-error{
+        background-color: rgb(255, 59, 48);
+    }
+    p{
+        color: white;
+    }
+
     input:focus, input:hover{
         box-shadow: 0 2px 20px 4px rgba(0,0,0,.1);
     }
@@ -58,6 +72,14 @@ button{
     input:focus, input:hover{
         background-color: rgb(55, 55, 55);
     }
+
+    .login-error{
+        background-color: rgb(255, 69, 58);
+    }
+    p{
+        color: white;
+    }
+
     button{
         color: white;
         background-color: rgb(10, 132, 255);
