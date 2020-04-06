@@ -1,1 +1,3 @@
-# NodeTypescriptStarter
+# OpenCommunication
+
+Todo: Write a readme
