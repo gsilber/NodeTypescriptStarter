@@ -1,13 +1,16 @@
 import bodyParser from "body-parser";
 import express from "express";
+import { ApiRouter } from "./router";
+import mongoose = require("mongoose");
 
-import {ApiRouter} from "./router";
 
 class Application {
     public app: express.Application;
     public port: number;
-
+    public mongoUrl: string = 'mongodb://127.0.0.1:27017/opencommunicator';
+    public dbName: string = 'opencommunicator'
     constructor() {
+
         this.app = express();
         this.port = +process.env.serverPort || 3000;
         this.app.use(bodyParser.urlencoded({ extended: false }));
@@ -16,8 +19,13 @@ class Application {
     }
     // Starts the server on the port specified in the environment or on port 3000 if none specified.
     public start(): void {
-        this.buildRoutes();
-        this.app.listen(this.port, () => console.log("Server listening on port " + this.port + "!"));
+
+        this.app.listen(this.port, () => {
+            console.log("Server listening on port " + this.port + "!");
+            mongoose.connect(this.mongoUrl);
+            this.buildRoutes();
+        });
+
     }
 
     // sets up to allow cross-origin support from any host.  You can change the options to limit who can access the api.
@@ -25,7 +33,7 @@ class Application {
     // but should be setup correctly anyway.  Without this, angular would not be able to access the api it it is on
     // another server.
     public initCors(): void {
-        this.app.use(function(req: express.Request, res: express.Response, next: any) {
+        this.app.use(function (req: express.Request, res: express.Response, next: any) {
             res.header("Access-Control-Allow-Origin", "*");
             res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
             res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials");

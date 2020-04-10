@@ -9,12 +9,12 @@ export class ApiRouter {
     private servercontroller: ServerController = new ServerController();
     private roomcontroller: RoomController = new RoomController();
     private accountcontroller: AccountController = new AccountController();
-
+    
     // Creates the routes for this router and returns a populated router object
     public getRouter(): express.Router {
         //Handle account controller methods
-        this.router.post("/account", this.accountcontroller.CreateUser);
-        this.router.get("/account/authenticate", this.accountcontroller.AuthenticateUser);
+        this.router.post("/account", this.accountcontroller.CreateAccount);
+        this.router.get("/account/authenticate", this.accountcontroller.AuthenticateAccount);
         this.router.post("/account/addfriend", this.accountcontroller.AddFriend);
         this.router.delete("/account/removefriend", this.accountcontroller.RemoveFriend);
         this.router.get("/account/refreshfriends", this.accountcontroller.RefreshFriends);
