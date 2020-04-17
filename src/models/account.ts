@@ -7,6 +7,10 @@ export const AccountSchema = new Schema({
         type: String,
         required: 'Username is required'
     },
+    nickname: {
+        type: String,
+        required: 'Nickname is required'
+    },
     email: {
         type: String,
         required: 'Email is required'            
@@ -21,5 +25,25 @@ export const AccountSchema = new Schema({
     created_date: {
         type: Date,
         default: Date.now
-    }
+    },
+    friends: [{
+        username: {
+            type: String
+        },
+        messages: [{
+            userTo : {
+                type: String,
+                required: "userTo is required"
+            },
+            time : {
+                type: Date,
+                required : "Date is required"
+            },
+            content: {
+                type: String,
+                required : "Content is required"
+            }
+        }]
+    }]
+    
 });
