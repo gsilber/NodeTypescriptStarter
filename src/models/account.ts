@@ -32,7 +32,7 @@ export const AccountSchema = new Schema({
         },
         requeststate: {
             type: String,
-            enum: ['REQUESTED','SENT','ACCEPTED']
+            enum: ['REQUESTED','RECIEVED','ACCEPTED']
         },
         messages: [{
             userTo : {
