@@ -32,7 +32,6 @@ export class AccountController {
     public RequestPhotos(req: express.Request, res: express.Response): void {
         //TODO: return photos for the Accounts requested
     }
-
     public SendFriendChat(req: express.Request, res: express.Response): void {
         //TODO: add a message to the PersonalMessage table and ping Accounts to trigger refreshfriendchat
     }
