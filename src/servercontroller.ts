@@ -20,6 +20,7 @@ export class ServerController {
     }
     public LeaveServer(req: express.Request, res: express.Response): void {
         //TODO: remove a user to a server
+        // .update({ _id: 1 },{ $pull: { users: req } }) 
     }
     public RefreshServer(req: express.Request, res: express.Response): void {
         //TODO: return a list of all users and rooms in a server

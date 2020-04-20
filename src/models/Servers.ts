@@ -4,14 +4,14 @@ const Schema = mongoose.Schema;
 
 export const ServerSchema = new Schema({
     Id: {
-        type: Number,
+        type: mongoose.Types.ObjectId,
     },
     Name: {
         type: String,
     },
     Rooms: [{
         Id: {
-            type: Number
+            type: mongoose.Types.ObjectId
         }
     }],
     Users: [{
