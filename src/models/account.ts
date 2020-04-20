@@ -30,6 +30,10 @@ export const AccountSchema = new Schema({
         username: {
             type: String
         },
+        requeststate: {
+            type: String,
+            enum: ['REQUESTED','RECIEVED','ACCEPTED']
+        },
         messages: [{
             userTo : {
                 type: String,
