@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 export const RoomSchema = new Schema({
     id: {
-        type: String,
+        type: mongoose.Types.ObjectId,
         required: 'Id is required'
     },
     server: {
