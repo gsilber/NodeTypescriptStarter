@@ -16,6 +16,7 @@ export class ServerController {
     }
     public JoinServer(req: express.Request, res: express.Response): void {
         //TODO: add a user to a server
+        // .update({ _id: 1 },{ $push: { users: req } }) 
     }
     public LeaveServer(req: express.Request, res: express.Response): void {
         //TODO: remove a user to a server
