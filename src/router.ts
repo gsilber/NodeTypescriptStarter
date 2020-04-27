@@ -1,7 +1,7 @@
 import express from "express";
-import {ServerController} from "./servercontroller";
-import {RoomController} from "./roomcontroller";
-import {AccountController} from "./accountcontroller";
+import {ServerController} from "./controllers/servercontroller";
+import {RoomController} from "./controllers/roomcontroller";
+import {AccountController} from "./controllers/accountcontroller";
 
 
 export class ApiRouter {

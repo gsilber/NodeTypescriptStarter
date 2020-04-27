@@ -1,5 +1,5 @@
 import express from "express";
-import { ServerSchema } from './models/Servers';
+import { ServerSchema } from '../models/Servers';
 import mongoose = require("mongoose");
 const Server = mongoose.model('Server', ServerSchema);
 

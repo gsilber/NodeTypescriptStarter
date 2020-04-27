@@ -3,6 +3,9 @@ import mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 export const AccountSchema = new Schema({
+    Id: {
+        type: mongoose.Types.ObjectId,
+    },
     username: {
         type: String,
         required: 'Username is required'

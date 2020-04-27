@@ -1,5 +1,5 @@
 import express from "express";
-import { AccountSchema } from './models/account';
+import { AccountSchema } from '../models/account';
 import mongoose = require("mongoose");
 
 const Account = mongoose.model('Account', AccountSchema);
