@@ -13,14 +13,12 @@ export class RoomController {
     }
     public JoinRoomVoice(req: express.Request, res: express.Response): void {
         //TODO: return list of who is in the voice room and trigger peers to connect to you
-
     }
     public RefreshRoomVoice(req: express.Request, res: express.Response): void {
         //TODO: return list of of everyone in the voice room
     }
     public JoinRoomVideo(req: express.Request, res: express.Response): void {
         //TODO: return list of who is in the video room and trigger peers to connect to you
-
     }
     public RefreshRoomVideo(req: express.Request, res: express.Response): void {
         //TODO: return list of of everyone in the video room

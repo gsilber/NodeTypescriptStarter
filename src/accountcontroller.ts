@@ -37,7 +37,6 @@ export class AccountController {
     }
     public RefreshFriendChat(req: express.Request, res: express.Response): void {
         //TODO: return list of of every message after the last one.
-
     }
 
 }
