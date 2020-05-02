@@ -7,6 +7,8 @@ const Schema = mongoose.Schema;
 export interface IUser extends mongoose.Document {
     username: string;
     password:string;
+    friends: mongoose.Types.Array<string>;
+    friendrequests: mongoose.Types.Array<string>;
     validatePassword(password: string): boolean;
     encryptString(password: string):string;
 }  
@@ -15,11 +17,25 @@ const UserSchema: mongoose.Schema = new Schema({
 
     username: {
         type: String,
+        required: "username is required"
     },
     password: {
         type: String,
+        required: "password is required"
+    },
+    friendrequests: [{       
+        username: {
+            type: String,
+            required: "username is required"
         }
-    });
+    }],
+    friends: [{
+        username: {
+            type:String,
+            required: "username is required"
+        }
+    }]
+});
 
 UserSchema.methods.validatePassword = function(password:string): boolean{
     if (this.password==='*') {return false;}
