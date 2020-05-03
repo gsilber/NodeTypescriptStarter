@@ -1,7 +1,6 @@
 import express from "express";
-import { ServerSchema } from './serverModel';
+import Server from './serverModel';
 import mongoose = require("mongoose");
-const Server = mongoose.model('Server', ServerSchema);
 
 export class ServerController {
     public CreateServer(req: express.Request, res: express.Response): void {
@@ -16,11 +15,13 @@ export class ServerController {
     }
     public JoinServer(req: express.Request, res: express.Response): void {
         //TODO: add a user to a server
-        // .update({ _id: 1 },{ $push: { users: req } }) 
+        const serverId = req.query.serverId;
+        Server.findOneAndUpdate({ _id: serverId }, {$push:{ Users: req.body.username}} );
     }
     public LeaveServer(req: express.Request, res: express.Response): void {
         //TODO: remove a user to a server
-        // .update({ _id: 1 },{ $pull: { users: req } }) 
+        const serverId = req.query.serverId;
+        Server.findOneAndDelete({$pull:{ Users: req.body.username}});
     }
     public RefreshServer(req: express.Request, res: express.Response): void {
         //TODO: return a list of all users and rooms in a server
