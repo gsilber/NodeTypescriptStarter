@@ -16,7 +16,7 @@ export interface Friend {
     messages: Message;
 }
 
-export interface Message {
+export interface Message extends mongoose.Document{
     userTo: string;
     userFrom: string;
     time: Date;
@@ -24,6 +24,10 @@ export interface Message {
 }
 
 const MessageSchema: mongoose.Schema = new Schema({
+    username: {
+        type: String,
+        required: "username is required"
+    },
     friendrequests: [{
         username: {
             type: String,
@@ -36,14 +40,6 @@ const MessageSchema: mongoose.Schema = new Schema({
             required: "username is required"
         },
         messages: [{
-            userTo: {
-                type: String,
-                required: "userTo is required"
-            },
-            userFrom: {
-                type: String,
-                required: "userTo is required"
-            },
             time: {
                 type: Date,
                 required: "Date is required"
@@ -56,4 +52,4 @@ const MessageSchema: mongoose.Schema = new Schema({
     }]
 });
 
-export default mongoose.model<IMessage>("Message", MessageSchema);
+export default mongoose.model<Message>("Message", MessageSchema);
