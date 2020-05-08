@@ -10,16 +10,17 @@ export class MessageController {
     public SendFriendChat(req: express.Request, res: express.Response): void {
         //TODO: add a message to the PersonalMessage table and ping Accounts to trigger refreshfriendchat
         const userId = req.query.userId;
-        Message.findOne({ _id: userId }, function (err, message) {
-            if (err || message == null) {
+        Message.findOne({ _id: userId }, function (err, messageDoc) {
+            if (err || messageDoc == null) {
                 return res.sendStatus(500).end();
             }
+            var message = new Message({ time: Date.now , content: req.body.content});
             message.save(function (err) {
                 if (err) {
                     return res.sendStatus(500).end();
                 }
                 else {
-                    return res.send({ fn: 'friend request sent', status: 'success' });
+                    return res.send({ fn: 'message sent', status: 'success' });
                 }
             });
         });
@@ -30,7 +31,7 @@ export class MessageController {
     public AddFriend(req: express.Request, res: express.Response): void {
         //TODO: add an entry in the friends table and ping Accounts to trigger refreshfriends
         const userId = req.query.userId;
-        User.findOne({ _id: userId }, {$push: { friendrequests: {username: req.body.username}}}, function (err, user) {
+        User.findOneAndUpdate({ _id: userId }, {$push: { friendrequests: {username: req.body.username}}}, function (err, user) {
             if (err || user == null) {
                 return res.sendStatus(500).end();
             }
@@ -40,6 +41,48 @@ export class MessageController {
                 }
                 else {
                     return res.send({ fn: 'friend request sent', status: 'success' });
+                }
+            });
+        });
+        User.findOneAndUpdate({ username: req.body.username}, {$push: { friendrequests: {username: req.query.username}}}, function (err, user) {
+            if (err || user == null) {
+                return res.sendStatus(500).end();
+            }
+            user.save(function (err) {
+                if (err) {
+                    return res.sendStatus(500).end();
+                }
+                else {
+                    return res.send({ fn: 'friend request sent', status: 'success' });
+                }
+            });
+        });
+    }
+    public DeclineFriend(req: express.Request, res: express.Response): void {
+        const userId = req.query.userId;
+        User.findOneAndUpdate({ _id: userId }, {$pull: { friendrequests: {username: req.body.username}}}, function (err, user) {
+            if (err || user == null) {
+                return res.sendStatus(500).end();
+            }
+            user.save(function (err) {
+                if (err) {
+                    return res.sendStatus(500).end();
+                }
+                else {
+                    return res.send({ fn: 'friend request removed', status: 'success' });
+                }
+            });
+        }); 
+        User.findOneAndUpdate({ username: req.body.username}, {$pull: { friendrequests: {username: req.query.username}}}, function (err, user) {
+            if (err || user == null) {
+                return res.sendStatus(500).end();
+            }
+            user.save(function (err) {
+                if (err) {
+                    return res.sendStatus(500).end();
+                }
+                else {
+                    return res.send({ fn: 'friend request removed', status: 'success' });
                 }
             });
         });
@@ -47,8 +90,7 @@ export class MessageController {
     public AcceptFriend(req: express.Request, res: express.Response): void {
         //TODO: add an entry in the friends table and ping Accounts to trigger refreshfriends
         const userId = req.query.userId;
-        User.findOneAndDelete({$pull: { friendrequests: {username: req.body.username}}} );
-        User.findOneAndUpdate({ _id: userId }, {$push:{ friends: {username: req.body.username}}}, function (err, user) {
+        User.findOneAndUpdate({ _id: userId }, {$pull: { friendrequests: {username: req.body.username}}}, function (err, user) {
             if (err || user == null) {
                 return res.sendStatus(500).end();
             }
@@ -57,14 +99,67 @@ export class MessageController {
                     return res.sendStatus(500).end();
                 }
                 else {
-                    return res.send({ fn: 'friend request sent', status: 'success' });
+                    return res.send({ fn: 'friend request removed', status: 'success' });
+                }
+            });
+        });       
+        User.findOneAndUpdate({ _id: userId }, {$push: { friends: {username: req.body.username}}}, function (err, user) {
+            if (err || user == null) {
+                return res.sendStatus(500).end();
+            }
+            user.save(function (err) {
+                if (err) {
+                    return res.sendStatus(500).end();
+                }
+                else {
+                    return res.send({ fn: 'friend added', status: 'success' });
+                }
+            });
+        });
+        User.findOneAndUpdate({ username: req.body.username}, {$pull: { friendrequests: {username: req.query.username}}}, function (err, user) {
+            if (err || user == null) {
+                return res.sendStatus(500).end();
+            }
+            user.save(function (err) {
+                if (err) {
+                    return res.sendStatus(500).end();
+                }
+                else {
+                    return res.send({ fn: 'friend request removed', status: 'success' });
+                }
+            });
+        });
+        User.findOneAndUpdate({username: req.body.username }, {$push: { friends: {username: req.query.username}}}, function (err, user) {
+            if (err || user == null) {
+                return res.sendStatus(500).end();
+            }
+            user.save(function (err) {
+                if (err) {
+                    return res.sendStatus(500).end();
+                }
+                else {
+                    return res.send({ fn: 'friend added', status: 'success' });
                 }
             });
         });
     }
     public RemoveFriend(req: express.Request, res: express.Response): void {
-        //TODO: remove an entry in the friends table and ping Accounts to trigger refreshfriends\
-        User.findOneAndDelete({$pull: { friends: {username: req.body.username}}}, function (err, user) {
+        //TODO: remove an entry in the friends table and ping Accounts to trigger refreshfriends
+        const userId = req.query.userId;
+        User.findOneAndUpdate({ _id: userId }, {$push: { friends: {username: req.body.username}}}, function (err, user) {
+            if (err || user == null) {
+                return res.sendStatus(500).end();
+            }
+            user.save(function (err) {
+                if (err) {
+                    return res.sendStatus(500).end();
+                }
+                else {
+                    return res.send({ fn: 'friend removed', status: 'success' });
+                }
+            });
+        });
+        User.findOneAndUpdate({username: req.body.username }, {$push: { friends: {username: req.query.username}}}, function (err, user) {
             if (err || user == null) {
                 return res.sendStatus(500).end();
             }

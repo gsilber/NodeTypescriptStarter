@@ -16,11 +16,11 @@ export class ServerController {
     public JoinServer(req: express.Request, res: express.Response): void {
         //TODO: add a user to a server
         const serverId = req.query.serverId;
-        Server.findOneAndUpdate({ _id: serverId }, {$push:{ Users: req.body.username}}, function (err, user) {
-            if (err || user == null) {
+        Server.findOneAndUpdate({ _id: serverId }, {$push:{ Users: req.body.username}}, function (err, server) {
+            if (err || server == null) {
                 return res.sendStatus(500).end();
             }
-            user.save(function (err) {
+            server.save(function (err) {
                 if (err) {
                     return res.sendStatus(500).end();
                 }
@@ -33,21 +33,22 @@ export class ServerController {
     public LeaveServer(req: express.Request, res: express.Response): void {
         //TODO: remove a user to a server
         const serverId = req.query.serverId;
-        Server.findOneAndDelete({$pull:{ Users: req.body.username}}, function (err, user) {
-            if (err || user == null) {
+        Server.findOneAndUpdate({ _id: serverId }, {$pull:{ Users: req.body.username}}, function (err, server) {
+            if (err || server == null) {
                 return res.sendStatus(500).end();
             }
-            user.save(function (err) {
+            server.save(function (err) {
                 if (err) {
                     return res.sendStatus(500).end();
                 }
                 else {
-                    return res.send({ fn: 'left server', status: 'success' });
+                    return res.send({ fn: 'Left Server', status: 'success' });
                 }
             });
         });
     }
     public RefreshServer(req: express.Request, res: express.Response): void {
         //TODO: return a list of all users and rooms in a server
+        Server.find();
     }
 }
