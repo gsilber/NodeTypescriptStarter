@@ -49,6 +49,18 @@ export class ServerController {
     }
     public RefreshServer(req: express.Request, res: express.Response): void {
         //TODO: return a list of all users and rooms in a server
-        Server.find();
+        Server.findOne({ Name: req.body.Name }, "Users",function (err, server) {
+            if (err || server == null) {
+                return res.sendStatus(500).end();
+            }
+            server.save(function (err) {
+                if (err) {
+                    return res.sendStatus(500).end();
+                }
+                else {
+                    return res.send({ fn: 'Friends List retrieved', status: 'success' });
+                }
+            });
+        });
     }
 }
