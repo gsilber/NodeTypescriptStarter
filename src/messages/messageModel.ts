@@ -1,4 +1,3 @@
-import socketIO, { Server as SocketIOServer } from "socket.io";
 import mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
