@@ -1,29 +1,23 @@
+import socketIO, { Server as SocketIOServer } from "socket.io";
 import mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
-
-export interface IMessage extends mongoose.Document {
-    userTo: string;
-    userFrom: string;
-    time: Date;
-    content: String;
-    friends: mongoose.Types.Array<string>;
-    friendrequests: mongoose.Types.Array<string>;
-}
 
 export interface Friend {
     username: string;
     messages: Message;
 }
 
-export interface Message {
-    userTo: string;
-    userFrom: string;
+export interface Message extends mongoose.Document{
     time: Date;
     content: string;
 }
 
 const MessageSchema: mongoose.Schema = new Schema({
+    username: {
+        type: String,
+        required: "username is required"
+    },
     friendrequests: [{
         username: {
             type: String,
@@ -36,14 +30,6 @@ const MessageSchema: mongoose.Schema = new Schema({
             required: "username is required"
         },
         messages: [{
-            userTo: {
-                type: String,
-                required: "userTo is required"
-            },
-            userFrom: {
-                type: String,
-                required: "userTo is required"
-            },
             time: {
                 type: Date,
                 required: "Date is required"
@@ -56,4 +42,5 @@ const MessageSchema: mongoose.Schema = new Schema({
     }]
 });
 
-export default mongoose.model<IMessage>("Message", MessageSchema);
+
+export default mongoose.model<Message>("Message", MessageSchema);
